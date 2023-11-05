@@ -1,0 +1,63 @@
+openapi: 3.0.0
+info:
+  version: 1.0.0
+  title: Glow E-commerce Website
+  description: API for Glow platform - skin care products 
+  contact:
+    email: 1nourahalmanea@gmail.com
+servers:
+  - url: http://localhost:8000
+tags:
+  - name: products
+    description: Everything about your products
+
+components:
+  schemas:
+    User:
+      type: object
+      properties:
+        id:
+          type: string
+        firstName:
+          type: string
+        lastName:
+          type: string
+        email:
+          type: string
+        password:
+          type: string     
+          
+    Product:
+     type: object
+     required:
+       - name
+       - category
+       - description
+       - price
+       - image
+     properties:
+       id:
+         type: string
+       name:
+         type: string
+       price:
+         type: number
+       description:
+         type: string
+       category:
+         type: string
+       image:
+        type: string
+
+
+paths:
+  /products:
+    get:
+      responses: 
+        200:
+          description: return all products   
+        500:
+          description: server error        
+
+                    
+       
