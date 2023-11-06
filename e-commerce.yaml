@@ -139,7 +139,7 @@ paths:
                 $ref: '#/components/schemas/Product'
       responses:
         201:
-          description: Single product is created
+          description: product is created
           content:
             application/json:
               schema:
