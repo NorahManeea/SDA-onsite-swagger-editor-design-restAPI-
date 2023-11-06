@@ -113,7 +113,8 @@ paths:
             enum: 
              - 'lowest price'
              - 'highest price'
-          required: false    
+          required: false   
+           
       responses:
         200:
           description: Return all products
@@ -125,7 +126,8 @@ paths:
                   $ref: '#/components/schemas/Product'
         500:
           description: Server error
-  /products/{productId}:
+
+
     post:
       tags:
         - products
@@ -134,7 +136,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Product'
+                $ref: '#/components/schemas/Product'
       responses:
         201:
           description: Single product is created
@@ -144,7 +146,8 @@ paths:
                 $ref: '#/components/schemas/Product'
         500:
           description: Server error
-
+      
+  /products/{productId}:
     get:
       tags:
         - products
