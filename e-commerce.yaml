@@ -9,23 +9,34 @@ servers:
   - url: http://localhost:8000
 tags:
   - name: products
-    description: Everything about your products
-
+    description: Everything about products
+  - name: users
+    description:  Everything about Users
 components:
   schemas:
     User:
       type: object
+      required:
+        - lastName
+        - firstName
+        - password
+        - email
       properties:
         id:
           type: string
+          example: 1
         firstName:
           type: string
+          example: Norah
         lastName:
           type: string
+          example: AlManeea
         email:
           type: string
+          example: 1nourahalmanea@gmail.com
         password:
-          type: string     
+          type: string
+          example: 1234
           
     Product:
      type: object
@@ -38,21 +49,43 @@ components:
      properties:
        id:
          type: string
+         example: 1
        name:
          type: string
+         example: Serum
        price:
          type: number
-       description:
+         example: 390
+       description:  
          type: string
+         example: serum description
        category:
          type: string
+         example: serum
        image:
         type: string
+        example: img_url
+
+    Order:
+     type: object
+     properties:
+      id:
+        type: string
+        example: 1
+      total:
+       type: number
+       example: 495
+      orderItems:
+        type: array
+        items:
+        $ref: '#/components/schemas/Product'
 
 
 paths:
   /products:
     get:
+      tags:
+        - products
       summary: Get list of products
       responses:
         200:
@@ -67,6 +100,8 @@ paths:
           description: Server error
   /products/{productId}:
     post:
+      tags:
+        - products
       summary: Create a product
       requestBody:
         content:
@@ -103,6 +138,8 @@ paths:
         500:
           description: Server error
     put:
+      tags:
+        - products
       summary: Update a single product
       requestBody:
         content:
@@ -125,6 +162,8 @@ paths:
         500:
           description: Server error
     delete:
+      tags:
+        - products
       summary: Delete a single product
       parameters:
         - in: path
@@ -139,6 +178,8 @@ paths:
           description: Server error
   /products/search:
     get:
+      tags:
+        - products
       summary: Search products
       parameters:
         - in: query
@@ -159,7 +200,101 @@ paths:
         500:
           description: Server error
         
-     
+    # Users
+  /users:
+   get:
+      tags:
+        - users
+      summary: Get list of users
+      description: description
+      responses:
+        200:
+          description: Return all users
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/User'
+        500:
+          description: Server error
+  /users/{userId}:
+    post:
+      tags:
+        - users
+      summary: Create a user
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+      responses:
+        201:
+          description: Single user is created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        500:
+          description: Server error
+    get:
+      tags:
+        - users
+      summary: Get a single product
+      parameters:
+        - in: path
+          name: userId
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: Single user is returned
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        500:
+          description: Server error
+    put:
+      tags:
+        - users
+      summary: Update a single product
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+      parameters:
+        - in: path
+          name: userId
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: Update a single user
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        500:
+          description: Server error
+    delete:
+      tags:
+        - users
+      summary: Delete a single product
+      parameters:
+        - in: path
+          name: userId
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: Delete a single user
+        500:
+          description: Server error
+                   
+      #  Orders
 
-                    
-       
