@@ -357,16 +357,6 @@ paths:
       tags:
         - users
       summary: logout
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                email:
-                  type: string
-                password:
-                  type: string
       responses:
         200:
           description: User logged out
