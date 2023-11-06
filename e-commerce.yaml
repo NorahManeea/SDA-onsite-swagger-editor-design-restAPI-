@@ -40,8 +40,7 @@ components:
           example: 1nourahalmanea@gmail.com
         password:
           type: string
-          example: 1234
-          
+          example: 1234      
     Product:
      type: object
      required:
@@ -68,7 +67,6 @@ components:
        image:
         type: string
         example: img_url
-
     Order:
      type: object
      properties:
@@ -91,6 +89,7 @@ components:
            type: string
 
 paths:
+# Products 
   /products:
     get:
       tags:
@@ -232,7 +231,7 @@ paths:
         500:
           description: Server error
         
-    # Users
+# Users
   /users:
    get:
       tags:
@@ -254,7 +253,7 @@ paths:
     post:
       tags:
         - users
-      summary: register a user
+      summary: create a user
       requestBody:
         content:
           application/json:
@@ -272,7 +271,7 @@ paths:
     get:
       tags:
         - users
-      summary:  user login
+      summary:  get single user
       parameters:
         - in: path
           name: userId
@@ -331,9 +330,50 @@ paths:
            description: User not found  
         500:
           description: Server error
-                  
-#  Categories
-
+  /users/login:
+    post:
+      tags:
+        - users
+      summary: login
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                password:
+                  type: string
+      responses:
+        200:
+          description: User authinticated
+        401:
+          description: User un-authorized
+        500:
+          description: Server error     
+  /users/logout:
+    post:
+      tags:
+        - users
+      summary: logout
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                password:
+                  type: string
+      responses:
+        200:
+          description: User logged out
+        500:
+          description: Server error            
+              
+# Categories
   /categories:
    get:
       tags:
@@ -533,7 +573,6 @@ paths:
         500:
           description: Server error
                   
-
 
 
 
