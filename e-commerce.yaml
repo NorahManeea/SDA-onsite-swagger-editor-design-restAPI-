@@ -37,6 +37,7 @@ components:
           example: AlManeea
         email:
           type: string
+          format: email
           example: 1nourahalmanea@gmail.com
         password:
           type: string
@@ -111,9 +112,9 @@ paths:
           schema:
             type: number
             enum: 
-             - 'lowest price'
-             - 'highest price'
-          required: false   
+              - 1  # "lowest price"
+              - 2  # "highest price"
+          required: false  
            
       responses:
         200:
@@ -384,8 +385,7 @@ paths:
                   $ref: '#/components/schemas/Category'    
         500:
           description: Server error
-  /categories/{categoryId}:
-    post:
+   post:
       tags:
         - categories
       summary: create a category
@@ -402,7 +402,9 @@ paths:
               schema:
                 $ref: '#/components/schemas/Category'
         500:
-          description: Server error
+          description: Server error       
+  /categories/{categoryId}:
+    
     get:
       tags:
         - categories
@@ -484,8 +486,8 @@ paths:
                   $ref: '#/components/schemas/Order'    
         500:
           description: Server error
-  /orders/{orderId}:
-    post:
+
+   post:
       tags:
         - orders
       summary: create an order
@@ -502,7 +504,9 @@ paths:
               schema:
                 $ref: '#/components/schemas/Order'
         500:
-          description: Server error
+          description: Server error        
+  /orders/{orderId}:
+    
     get:
       tags:
         - orders
